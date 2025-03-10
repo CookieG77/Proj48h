@@ -22,3 +22,20 @@
     .addEventListener('keypress', function(e) {
     if (e.key === 'Enter') handleSubmit();
 });
+
+ document.addEventListener('DOMContentLoaded', () => {
+     // Get all typewriter elements
+     const typewriters = document.querySelectorAll('.typewriter');
+
+     typewriters.forEach(element => {
+         // Get text content and calculate length
+         const text = element.textContent.trim();
+         const length = text.length;
+
+         // Set CSS custom property
+         element.style.setProperty('--char-count', length);
+
+         // Optional: Add aria-label for accessibility
+         element.setAttribute('aria-label', `Typing: ${text}`);
+     });
+ });
