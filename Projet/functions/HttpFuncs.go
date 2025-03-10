@@ -38,6 +38,12 @@ func MakeTemplateAndExecute(w http.ResponseWriter, r *http.Request, content inte
 // NewContentInterface renvoie une map[string]interface{} avec un titre donné en paramètre
 func NewContentInterface(pageTitle string, w http.ResponseWriter, r *http.Request) map[string]interface{} {
 	ContentInterface := make(map[string]interface{})
+	// On récupère la langue de l'utilisateur
+	langText, err := GetLangContent(GetAndSetUserLang(w, r))
+	if err != nil {
+		panic(err)
+	}
+	ContentInterface["Lang"] = langText
 	ContentInterface["Title"] = pageTitle
 
 	return ContentInterface
