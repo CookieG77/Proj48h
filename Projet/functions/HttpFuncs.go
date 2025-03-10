@@ -6,9 +6,9 @@ import (
 	"net/http"
 )
 
-// MakeTemplate crée un template à partir d'un ou plusieurs fichiers de template donné en paramètre sous la forme de leur chemin en string
+// MakeTemplate crée un templates à partir d'un ou plusieurs fichiers de templates donné en paramètre sous la forme de leur chemin en string
 func MakeTemplate(w http.ResponseWriter, templatesDir ...string) *template.Template {
-	templatesDir = append(templatesDir, "templates/base.html", "statics/images/synthwave_logo.html")
+	templatesDir = append(templatesDir, "templates/base.html")
 	tmpl, err := template.New("base.html").ParseFiles(templatesDir...)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -17,7 +17,7 @@ func MakeTemplate(w http.ResponseWriter, templatesDir ...string) *template.Templ
 	return tmpl
 }
 
-// ExecuteTemplate exécute un template donner en paramètre
+// ExecuteTemplate exécute un templates donner en paramètre
 func ExecuteTemplate(w http.ResponseWriter, tmpl *template.Template, content interface{}) {
 	if tmpl == nil {
 		http.Error(w, "Template is nil", http.StatusInternalServerError)

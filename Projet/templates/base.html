@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website Analyzer</title>
-    <link rel="stylesheet" href="../CSS/Styles.css" >
+    <title>Website Analyzer : {{ .Title }}</title>
+    <link rel="stylesheet" href="/css/style.css" >
 </head>
 <body>
 <header>
@@ -20,7 +20,7 @@
 </header>
 
 <main>
-<!-- contenu principal -->
+    {{ template "content" . }}
 </main>
 
 <footer>
@@ -40,16 +40,14 @@
         <div class="footer-section">
             <h3>Connect</h3>
             <ul>
-                <li><a href="#">Twitter</a></li>
-                <li><a href="#">LinkedIn</a></li>
-                <li><a href="#">GitHub</a></li>
+                <li><a target="_blank" rel="noopener noreferrer" href="https://github.com/CookieG77/WPS48H">GitHub</a></li>
             </ul>
         </div>
     </div>
     <div class="footer-bottom">
-        <p>&copy; 2024 Website Analyzer. All rights reserved.</p>
+        <p>&copy; ©2025 WPS48H. CC BY-NC-ND 4.0.</p>
     </div>
 </footer>
-<script src="../javascript/Script.js"></script>
+<script src="/js/script.js"></script>
 </body>
 </html>

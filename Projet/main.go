@@ -1,7 +1,7 @@
 package main
 
 import (
-	Proj48h "Proj48h/functions"
+	Proj48h "Proj48h/backend"
 )
 
 func main() {

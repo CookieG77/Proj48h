@@ -1,6 +1,7 @@
-package functions
+package backend
 
 import (
+	"Proj48h/functions"
 	pages "Proj48h/functions/pages"
 	"fmt"
 	"net/http"
@@ -20,14 +21,14 @@ func LaunchWebApp() {
 	go func() {
 		for sig := range c {
 			if sig == os.Interrupt {
-				ClearCmd()
+				functions.ClearCmd()
 				os.Exit(1)
 			}
 		}
 	}()
 
 	// Gestion des arguments
-	Args := GetArgs()
+	Args := functions.GetArgs()
 	if slices.Contains(Args, "--port") {
 		// Gestion argument '--port [port]'
 		if len(Args) > slices.Index(Args, "--port")+1 {

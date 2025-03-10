@@ -1,4 +1,5 @@
- <div class="container">
+{{ define "content" }}
+    <div class="container">
         <h1>Website Analyzer</h1>
         <div class="input-group">
             <input type="url" id="websiteUrl"
@@ -8,4 +9,5 @@
         </div>
         <button onclick="handleSubmit()">Analyze Website</button>
         <div class="status-message" id="statusMessage"></div>
- </div>
+    </div>
+{{ end }}
