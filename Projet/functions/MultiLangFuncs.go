@@ -16,7 +16,7 @@ const (
 )
 
 // List of all the languages
-var langList = []Lang{Fr, En}
+var langList = []Lang{En, Fr}
 
 // GetLangContent returns the map[string]string containing each field text adapted to the given language
 // Also returns an error if the file can't be read or if the json can't be unmarshalled
@@ -46,4 +46,13 @@ func StrToLang(str string) Lang {
 		}
 	}
 	return En
+}
+
+// LangListToStrList return the given list of Lang and return it as list of string
+func LangListToStrList(langList []Lang) []string {
+	strList := make([]string, len(langList))
+	for i, l := range langList {
+		strList[i] = string(l)
+	}
+	return strList
 }

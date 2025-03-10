@@ -16,8 +16,11 @@
             <a href="#">Documentation</a>
             <a href="#">Contact</a> -->
             <select class="lang-select">
+                <option value="{{ .CurrentLang }}">{{ .CurrentLang }}</option>
                 {{ range .LangList }}
-                    <option>{{ . }}</option>
+                    {{ if ne $.CurrentLang . }}
+                        <option value="{{ . }}">{{ . }}</option>
+                    {{ end }}
                 {{ end }}
             </select>
         </div>

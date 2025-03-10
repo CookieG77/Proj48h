@@ -39,13 +39,16 @@ func MakeTemplateAndExecute(w http.ResponseWriter, r *http.Request, content inte
 func NewContentInterface(pageTitleKey string, w http.ResponseWriter, r *http.Request) map[string]interface{} {
 	ContentInterface := make(map[string]interface{})
 	// On récupère la langue de l'utilisateur
-	langText, err := GetLangContent(GetAndSetUserLang(w, r))
+	currentLang := GetAndSetUserLang(w, r)
+	fmt.Println(currentLang)
+	langText, err := GetLangContent(currentLang)
 	if err != nil {
 		panic(err)
 	}
 	ContentInterface["Lang"] = langText
 	ContentInterface["Title"] = langText["pageNames"].(map[string]interface{})[pageTitleKey]
-	ContentInterface["LangList"] = langList
+	ContentInterface["LangList"] = LangListToStrList(langList)
+	ContentInterface["CurrentLang"] = string(currentLang)
 
 	return ContentInterface
 }

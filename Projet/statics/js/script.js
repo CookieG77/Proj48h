@@ -43,3 +43,14 @@
  function setLang(lang) {
      document.cookie = `lang=${lang};expires=0;samesite=lax;path=/`;
  }
+
+ document.addEventListener('DOMContentLoaded', function () {
+     const langSelect = document.querySelector('.lang-select');
+     if (langSelect) {
+         langSelect.addEventListener('change', function () {
+             const selectedLang = this.value;
+             setLang(selectedLang);
+             location.reload();
+         });
+     }
+ });
