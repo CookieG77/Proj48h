@@ -45,6 +45,7 @@ func NewContentInterface(pageTitleKey string, w http.ResponseWriter, r *http.Req
 	}
 	ContentInterface["Lang"] = langText
 	ContentInterface["Title"] = langText["pageNames"].(map[string]interface{})[pageTitleKey]
+	ContentInterface["LangList"] = langList
 
 	return ContentInterface
 }

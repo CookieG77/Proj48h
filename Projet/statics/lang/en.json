@@ -4,8 +4,21 @@
     "report" : "Report"
   },
   "base" : {
+    "header": {
+      "homeNav": "Home"
+    },
+    "footer": {
+      "aboutUs": "About Us",
+      "aboutUsMessage": "Providing website analysis solutions with cutting-edge technology.",
+      "connect": "Connect",
+      "connectGitHub": "GitHub"
+    }
   },
   "home" : {
+    "homeMessage": "Analyse and Securize your site.",
+    "inputMessage": "Website Analyzer",
+    "inputPlaceholder": "Enter website URL (e.g., https://example.com)",
+    "inputButton": "Analyse Webside"
   },
   "report" : {
   }

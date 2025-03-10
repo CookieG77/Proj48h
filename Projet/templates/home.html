@@ -1,16 +1,16 @@
 {{ define "content" }}
 
 
-    <div class="typewriter unselectable">Analyse and Securize your site</div>
+    <div class="typewriter unselectable">{{ .Lang.home.homeMessage }}</div>
     <div class="container">
-        <h1 class="unselectable">Website Analyzer</h1>
+        <h1 class="unselectable">{{ .Lang.home.inputMessage }}</h1>
         <div class="input-group">
             <input type="url" id="websiteUrl"
-                   placeholder="Enter website URL (e.g., https://example.com)"
+                   placeholder= {{ .Lang.home.inputPlaceholder }}
                    autocomplete="off"
                    required>
         </div>
-        <button onclick="handleSubmit()" class="unselectable">Analyze Website</button>
+        <button onclick="handleSubmit()" class="unselectable">{{ .Lang.home.inputButton }}</button>
         <div class="status-message" id="statusMessage"></div>
     </div>
 {{ end }}
