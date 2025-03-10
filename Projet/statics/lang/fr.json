@@ -1,7 +1,7 @@
 {
-  "PageNames" : {
+  "pageNames" : {
     "home" : "Acceuil",
-    "Report" : "Rapport"
+    "report" : "Rapport"
   },
   "base" : {
   },

@@ -39,3 +39,7 @@
          element.setAttribute('aria-label', `Typing: ${text}`);
      });
  });
+
+ function setLang(lang) {
+     document.cookie = `lang=${lang};expires=0;samesite=lax;path=/`;
+ }

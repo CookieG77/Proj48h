@@ -50,7 +50,7 @@ func LaunchWebApp() {
 
 	// Mettre la gestion des routes ici
 	http.HandleFunc("/", pages.HomePage)
-	http.HandleFunc("/group", pages.RecapPage)
+	http.HandleFunc("/report", pages.ReportPage)
 
 	// Définit le port du serveur local
 	finalPort := ""
@@ -61,8 +61,13 @@ func LaunchWebApp() {
 	}
 	println("Serveur lancer sur : http://localhost" + finalPort)
 
+	err := functions.InitMail("MailConfig.json")
+	if err != nil {
+		panic(err)
+	}
+
 	// Lance le serveur local
-	if err := http.ListenAndServe(finalPort, nil); err != nil {
+	if err = http.ListenAndServe(finalPort, nil); err != nil {
 		panic(err)
 	}
 }
