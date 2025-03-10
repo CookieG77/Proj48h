@@ -56,12 +56,16 @@ header {
 main {
     flex: 1;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 2rem;
 }
 
 .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background: white;
     padding: 40px;
     border-radius: 20px;
@@ -71,9 +75,36 @@ main {
     margin: 2rem 0;
 }
 
+ @keyframes typing {
+     from { width: 0; }
+     to { width: calc(var(--char-count) * 1ch + 5px); }
+ }
+
+ @keyframes blink {
+     0%, 100% { border-color: transparent; }
+     50% { border-color: black; }
+ }
+
+ .typewriter {
+     font-size: 3rem;
+     font-family: monospace;
+     font-weight: bold;
+     overflow: hidden;
+     white-space: nowrap;
+     border-right: 4px solid black;
+     display: inline-block;
+     animation:
+             typing 2s steps(var(--char-count)) forwards,
+             blink 0.75s step-end infinite;
+     animation-delay: 0s, 2s;
+     margin: 3px;
+ }
+
  .input-group {
      position: relative;
      margin-bottom: 30px;
+     width: 100%;
+     margin-top: 1rem;
  }
 
  input[type="url"] {
