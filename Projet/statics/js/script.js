@@ -50,6 +50,7 @@
          langSelect.addEventListener('change', function () {
              const selectedLang = this.value;
              setLang(selectedLang);
+             console.log(selectedLang)
              location.reload();
          });
      }

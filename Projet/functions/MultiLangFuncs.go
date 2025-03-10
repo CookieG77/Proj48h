@@ -64,7 +64,9 @@ func GetAndResetUserLang(w http.ResponseWriter, r *http.Request) Lang {
 	cookie := GetCookie(w, r, "lang")
 	if cookie == nil {
 		SetCookie(w, "lang", string(En))
+		InfoPrintf("Resetting user language -> %v\n", En)
 		return En
 	}
+	InfoPrintf("User language -> %v\n", StrToLang(cookie.Value))
 	return StrToLang(cookie.Value)
 }

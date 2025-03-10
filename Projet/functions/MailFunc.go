@@ -3,7 +3,6 @@ package functions
 import (
 	"encoding/json"
 	"github.com/go-gomail/gomail"
-	"log"
 	"os"
 	"sync"
 )
@@ -29,12 +28,12 @@ func InitMail(SMTPServerConfigFile string) {
 	// Load the SMTP server configuration
 	SMTPConfig, err := loadSMTPServerConfig(SMTPServerConfigFile)
 	if err != nil {
-		log.Printf("[Error] : Could not load the SMTP server configuration file -> %v\n", err)
+		WarningPrintf("Could not load the SMTP server configuration file -> %v\n", err)
 		return
 	}
 	dialer = gomail.NewDialer(SMTPConfig.SMTPHost, SMTPConfig.SMTPPort, SMTPConfig.SMTPUser, SMTPConfig.SMTPPass)
 	initialized = true
-	log.Printf("[Info]  : SMTP server initialized -> %v\n", SMTPConfig)
+	SuccessPrintf("SMTP server initialized -> %v\n", SMTPConfig)
 }
 
 // LoadSMTPServerConfig loads the SMTP server configuration from a json file.
@@ -62,7 +61,7 @@ func loadSMTPServerConfig(SMTPServerConfigFile string) (SMTPServerConfig, error)
 // If the mailer has not been initialized, the function will log an error and return.
 func SendMail(to string, subject string, content string) {
 	if !initialized {
-		log.Println("[Error] : Mail Service not initialized, check the SMTP server configuration file")
+		ErrorPrintln("Mail Service not initialized, check the SMTP server configuration file")
 		return
 	}
 
@@ -80,11 +79,11 @@ func sendMail(to string, subject string, content string, wg *sync.WaitGroup) {
 	m.SetHeader("From", dialer.Username)
 	m.SetHeader("To", to)
 	m.SetHeader("Subject", subject)
-	m.SetBody("text/html", content) // Envoi d'email en HTML
+	m.SetBody("text/html", content)
 
 	if err := dialer.DialAndSend(m); err != nil {
-		log.Printf("[Error] : could not send mail to %s -> %v\n", to, err)
+		ErrorPrintf("Could not send mail to %s -> %v\n", to, err)
 	} else {
-		log.Printf("Mail sent to %s\n", to)
+		InfoPrintf("Mail sent to %s\n", to)
 	}
 }

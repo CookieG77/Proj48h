@@ -3,7 +3,6 @@ package backend
 import (
 	pages "Proj48h/backend/pages"
 	"Proj48h/functions"
-	"log"
 	"net/http"
 	"os"
 	"os/signal"
@@ -32,17 +31,28 @@ func LaunchWebApp() {
 
 	// Managing the arguments
 	Args := functions.GetArgs()
-	if slices.Contains(Args, "--port") {
+	if slices.Contains(Args, "--port") || slices.Contains(Args, "-p") {
 		// Check if the port is provided
 		if len(Args) > slices.Index(Args, "--port")+1 {
 			rawProposedPort := Args[slices.Index(Args, "--port")+1]
 			proposedPort, err := strconv.Atoi(rawProposedPort)
 
 			if err != nil || proposedPort < 1 || proposedPort > 65535 {
-				log.Fatalln("[Fatal Error] : The port provided is not a valid number. Please provide a valid port number. (1-65535)")
+				functions.FatalPrintln("The port provided is not a valid number. Please provide a valid port number. (1-65535)")
+			}
+			Port = rawProposedPort
+		} else if len(Args) > slices.Index(Args, "-p")+1 {
+			rawProposedPort := Args[slices.Index(Args, "-p")+1]
+			proposedPort, err := strconv.Atoi(rawProposedPort)
+
+			if err != nil || proposedPort < 1 || proposedPort > 65535 {
+				functions.FatalPrintln("The port provided is not a valid number. Please provide a valid port number. (1-65535)")
 			}
 			Port = rawProposedPort
 		}
+	}
+	if slices.Contains(Args, "--show-info") || slices.Contains(Args, "-si") {
+		functions.ShouldLogInfo = true
 	}
 
 	// Managing the static files
@@ -63,7 +73,7 @@ func LaunchWebApp() {
 	}
 	functions.InitMail("MailConfig.json")
 
-	log.Printf("[Info]  : Serveur lancer sur -> http://localhost%s\n", finalPort)
+	functions.SuccessPrintf("Server started at -> http://localhost%s\n", finalPort)
 
 	// Launch the server
 	if err := http.ListenAndServe(finalPort, nil); err != nil {

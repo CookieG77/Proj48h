@@ -1,7 +1,6 @@
 package functions
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
 )
@@ -11,6 +10,7 @@ func MakeTemplate(w http.ResponseWriter, templatesDir ...string) *template.Templ
 	templatesDir = append(templatesDir, "templates/base.html")
 	tmpl, err := template.New("base.html").ParseFiles(templatesDir...)
 	if err != nil {
+		ErrorPrintf("An error occurred while trying to parse the template -> %v\n", err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return nil
 	}
@@ -20,11 +20,12 @@ func MakeTemplate(w http.ResponseWriter, templatesDir ...string) *template.Templ
 // ExecuteTemplate execute a template given as parameter.
 func ExecuteTemplate(w http.ResponseWriter, tmpl *template.Template, content interface{}) {
 	if tmpl == nil {
+		ErrorPrintln("An error occurred while trying to execute a template -> Template is nil")
 		http.Error(w, "Template is nil", http.StatusInternalServerError)
 		return
 	}
 	if err := tmpl.Execute(w, content); err != nil {
-		fmt.Printf("Error: %v\n", err)
+		ErrorPrintf("An error occurred while trying to execute a template -> %v\n", err)
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
 }
@@ -39,14 +40,15 @@ func MakeTemplateAndExecute(w http.ResponseWriter, r *http.Request, content inte
 // It also set the language of the user and the list of available languages, as well as the page theme.
 func NewContentInterface(pageTitleKey string, w http.ResponseWriter, r *http.Request) map[string]interface{} {
 	ContentInterface := make(map[string]interface{})
-	// On récupère la langue de l'utilisateur
+	// Getting the user language
 	currentLang := GetAndResetUserLang(w, r)
 	langText, err := GetLangContent(currentLang)
 	if err != nil {
-		panic(err)
+		ErrorPrintf("An error occurred while trying to get the language content -> %v/n", err)
+	} else {
+		ContentInterface["Lang"] = langText
+		ContentInterface["Title"] = langText["pageNames"].(map[string]interface{})[pageTitleKey]
 	}
-	ContentInterface["Lang"] = langText
-	ContentInterface["Title"] = langText["pageNames"].(map[string]interface{})[pageTitleKey]
 
 	// Setting the language
 	ContentInterface["LangList"] = LangListToStrList(langList)
