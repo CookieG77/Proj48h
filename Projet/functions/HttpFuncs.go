@@ -45,6 +45,7 @@ func NewContentInterface(pageTitle string, w http.ResponseWriter, r *http.Reques
 	}
 	ContentInterface["Lang"] = langText
 	ContentInterface["Title"] = pageTitle
+	ContentInterface["LangList"] = langList
 
 	return ContentInterface
 }

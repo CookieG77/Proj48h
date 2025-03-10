@@ -11,10 +11,15 @@
     <nav class="nav-container unselectable">
         <a href="#" class="logo">Analyzer</a>
         <div class="nav-links">
-            <a href="#">Home</a>
-            <a href="#">Features</a>
+            <a href="#">{{ .Lang.base.header.homeNav }}</a>
+            <!-- <a href="#">Features</a>
             <a href="#">Documentation</a>
-            <a href="#">Contact</a>
+            <a href="#">Contact</a> -->
+            <select class="lang-select">
+                {{ range .LangList }}
+                    <option>{{ . }}</option>
+                {{ end }}
+            </select>
         </div>
     </nav>
 </header>
@@ -26,21 +31,21 @@
 <footer>
     <div class="footer-content">
         <div class="footer-section">
-            <h3 class="unselectable">About Us</h3>
-            <p>Providing website analysis solutions with cutting-edge technology.</p>
+            <h3 class="unselectable">{{ .Lang.base.footer.aboutUs }}</h3>
+            <p>{{ .Lang.base.footer.aboutUsMessage }}</p>
         </div>
-        <div class="footer-section">
+        <!-- <div class="footer-section">
             <h3 class="unselectable">Legal</h3>
             <ul>
                 <li><a href="#">Privacy Policy</a></li>
                 <li><a href="#">Terms of Service</a></li>
                 <li><a href="#">Cookie Policy</a></li>
             </ul>
-        </div>
+        </div> -->
         <div class="footer-section">
-            <h3 class="unselectable">Connect</h3>
+            <h3 class="unselectable">{{ .Lang.base.footer.connect }}</h3>
             <ul>
-                <li><a target="_blank" rel="noopener noreferrer" href="https://github.com/CookieG77/WPS48H">{{ .Lang.base.footer.githubLink }}</a></li>
+                <li><a target="_blank" rel="noopener noreferrer" href="https://github.com/CookieG77/WPS48H">{{ .Lang.base.footer.connectGitHub }}</a></li>
             </ul>
         </div>
     </div>
