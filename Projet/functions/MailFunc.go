@@ -20,15 +20,18 @@ var wg sync.WaitGroup
 
 var dialer *gomail.Dialer
 
+var initialized bool = false
+
 // InitMail initializes the mailer
-func InitMail(SMTPServerConfigFile string) error {
+func InitMail(SMTPServerConfigFile string) {
 	// Load the SMTP server configuration
 	SMTPConfig, err := loadSMTPServerConfig(SMTPServerConfigFile)
 	if err != nil {
-		return err
+		log.Printf("Error loading SMTP server configuration: %v\n", err)
+		return
 	}
 	dialer = gomail.NewDialer(SMTPConfig.SMTPHost, SMTPConfig.SMTPPort, SMTPConfig.SMTPUser, SMTPConfig.SMTPPass)
-	return nil
+	initialized = true
 }
 
 // LoadSMTPServerConfig loads the SMTP server configuration from a json file.
@@ -54,6 +57,11 @@ func loadSMTPServerConfig(SMTPServerConfigFile string) (SMTPServerConfig, error)
 
 // SendMail sends an email to the specified address
 func SendMail(to string, subject string, content string) {
+	if !initialized {
+		log.Println("Mail Service not initialized")
+		return
+	}
+
 	wg.Add(1)
 	go sendMail(to, subject, content, &wg)
 	wg.Wait()

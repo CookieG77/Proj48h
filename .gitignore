@@ -25,7 +25,7 @@ go.work.sum
 .env
 
 # SMTP config file
-MailConfig.json
+**/MailConfig.json
 
 # API Key file
-APIKey.json
+**/APIKey.json

@@ -61,13 +61,10 @@ func LaunchWebApp() {
 	}
 	println("Serveur lancer sur : http://localhost" + finalPort)
 
-	err := functions.InitMail("MailConfig.json")
-	if err != nil {
-		panic(err)
-	}
+	functions.InitMail("MailConfig.json")
 
 	// Lance le serveur local
-	if err = http.ListenAndServe(finalPort, nil); err != nil {
+	if err := http.ListenAndServe(finalPort, nil); err != nil {
 		panic(err)
 	}
 }
