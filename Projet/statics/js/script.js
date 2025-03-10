@@ -54,3 +54,7 @@
          });
      }
  });
+
+ function setTheme(theme) {
+     document.cookie = `theme=${theme};expires=0;samesite=lax;path=/`;
+ }
