@@ -3,6 +3,7 @@ package functions
 import (
 	"encoding/json"
 	"fmt"
+	"net/http"
 	"os"
 )
 
@@ -11,11 +12,11 @@ type Lang string
 
 // Constants representing the different languages
 const (
-	Fr Lang = "fr"
 	En Lang = "en"
+	Fr Lang = "fr"
 )
 
-// List of all the languages
+// langList is a list of all the languages
 var langList = []Lang{En, Fr}
 
 // GetLangContent returns the map[string]string containing each field text adapted to the given language
@@ -55,4 +56,15 @@ func LangListToStrList(langList []Lang) []string {
 		strList[i] = string(l)
 	}
 	return strList
+}
+
+// GetAndResetUserLang return the language of the user if it exists
+// // Otherwise it will set it at its default value (En)
+func GetAndResetUserLang(w http.ResponseWriter, r *http.Request) Lang {
+	cookie := GetCookie(w, r, "lang")
+	if cookie == nil {
+		SetCookie(w, "lang", string(En))
+		return En
+	}
+	return StrToLang(cookie.Value)
 }

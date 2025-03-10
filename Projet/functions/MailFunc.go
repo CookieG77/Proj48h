@@ -15,23 +15,26 @@ type SMTPServerConfig struct {
 	SMTPPass string `json:"smtpPass"`
 }
 
-// WaitGroup is a struct that waits for a collection of goroutines to finish
+// wg (WaitGroup) is a struct that waits for a collection of goroutines to finish
 var wg sync.WaitGroup
 
 var dialer *gomail.Dialer
 
+// initialized is used to check if the SMTP service has been initialized or not.
 var initialized bool = false
 
-// InitMail initializes the mailer
+// InitMail initializes the mailer.
+// If the SMTP server configuration file is not found, the function will log an error and return.
 func InitMail(SMTPServerConfigFile string) {
 	// Load the SMTP server configuration
 	SMTPConfig, err := loadSMTPServerConfig(SMTPServerConfigFile)
 	if err != nil {
-		log.Printf("Error loading SMTP server configuration: %v\n", err)
+		log.Printf("[Error] : Could not load the SMTP server configuration file -> %v\n", err)
 		return
 	}
 	dialer = gomail.NewDialer(SMTPConfig.SMTPHost, SMTPConfig.SMTPPort, SMTPConfig.SMTPUser, SMTPConfig.SMTPPass)
 	initialized = true
+	log.Printf("[Info]  : SMTP server initialized -> %v\n", SMTPConfig)
 }
 
 // LoadSMTPServerConfig loads the SMTP server configuration from a json file.
@@ -55,10 +58,11 @@ func loadSMTPServerConfig(SMTPServerConfigFile string) (SMTPServerConfig, error)
 	return config, nil
 }
 
-// SendMail sends an email to the specified address
+// SendMail sends an email to the specified address.
+// If the mailer has not been initialized, the function will log an error and return.
 func SendMail(to string, subject string, content string) {
 	if !initialized {
-		log.Println("Mail Service not initialized")
+		log.Println("[Error] : Mail Service not initialized, check the SMTP server configuration file")
 		return
 	}
 
@@ -79,7 +83,7 @@ func sendMail(to string, subject string, content string, wg *sync.WaitGroup) {
 	m.SetBody("text/html", content) // Envoi d'email en HTML
 
 	if err := dialer.DialAndSend(m); err != nil {
-		log.Printf("Error sending mail at %s: %v\n", to, err)
+		log.Printf("[Error] : could not send mail to %s -> %v\n", to, err)
 	} else {
 		log.Printf("Mail sent to %s\n", to)
 	}

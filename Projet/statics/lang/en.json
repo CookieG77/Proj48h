@@ -15,10 +15,10 @@
     }
   },
   "home" : {
-    "homeMessage": "Analyse and Securize your site.",
+    "homeMessage": "Analyse and Secure your site.",
     "inputMessage": "Website Analyzer",
     "inputPlaceholder": "Enter website URL (e.g., https://example.com)",
-    "inputButton": "Analyse Webside"
+    "inputButton": "Analyse Website"
   },
   "report" : {
   }

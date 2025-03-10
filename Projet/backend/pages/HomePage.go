@@ -5,6 +5,7 @@ import (
 	"net/http"
 )
 
+// HomePage is the handler for the home page.
 func HomePage(w http.ResponseWriter, r *http.Request) {
 	PageInfo := f.NewContentInterface("home", w, r)
 

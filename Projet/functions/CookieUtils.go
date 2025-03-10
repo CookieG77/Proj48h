@@ -4,7 +4,7 @@ import (
 	"net/http"
 )
 
-// GetCookie renvoie le cookie demandé s'il existe, sinon renvoie nil
+// GetCookie returns the cookie with the given name.
 func GetCookie(w http.ResponseWriter, r *http.Request, name string) *http.Cookie {
 	cookie, err := r.Cookie(name)
 	if err != nil {
@@ -13,7 +13,9 @@ func GetCookie(w http.ResponseWriter, r *http.Request, name string) *http.Cookie
 	return cookie
 }
 
-// SetCookie définit le cookie avec le nom 'name' donné avec la valeur 'value' donnée.
+// SetCookie set the cookie with the given name to the given value.
+// This cookie is not meant to be used for marketing or data analysing of the user.
+// This implementation only serve to store a value in the user browser.
 func SetCookie(w http.ResponseWriter, name string, value string) {
 	http.SetCookie(w, &http.Cookie{
 		Name:     name,
@@ -24,15 +26,4 @@ func SetCookie(w http.ResponseWriter, name string, value string) {
 		Secure:   true,
 		SameSite: http.SameSiteStrictMode,
 	})
-}
-
-// GetAndSetUserLang renvoie la langue de l'utilisateur si elle existe.
-// Sinon définit la langue de l'utilisateur à la langue par défaut (En) et la renvoie.
-func GetAndSetUserLang(w http.ResponseWriter, r *http.Request) Lang {
-	cookie := GetCookie(w, r, "lang")
-	if cookie == nil {
-		SetCookie(w, "lang", "En")
-		return En
-	}
-	return StrToLang(cookie.Value)
 }
