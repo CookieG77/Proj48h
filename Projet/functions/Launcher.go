@@ -12,6 +12,7 @@ import (
 
 var Port = "8080"
 
+// LaunchWebApp lance l'application web
 func LaunchWebApp() {
 
 	c := make(chan os.Signal, 1)
@@ -42,9 +43,9 @@ func LaunchWebApp() {
 	}
 
 	// Mettre la gestion des fichiers statiques ici
-	http.Handle("/css/", http.StripPrefix("/css", http.FileServer(http.Dir("./statics/styles"))))
-	http.Handle("/img/", http.StripPrefix("/img", http.FileServer(http.Dir("./statics/images"))))
-	http.Handle("/js/", http.StripPrefix("/js", http.FileServer(http.Dir("./statics/scripts"))))
+	http.Handle("/css/", http.StripPrefix("/css", http.FileServer(http.Dir("./statics/css"))))
+	http.Handle("/img/", http.StripPrefix("/img", http.FileServer(http.Dir("./statics/img"))))
+	http.Handle("/js/", http.StripPrefix("/js", http.FileServer(http.Dir("./statics/js"))))
 
 	// Mettre la gestion des routes ici
 	http.HandleFunc("/", pages.HomePage)
