@@ -1,8 +1,8 @@
 package backend
 
 import (
+	pages "Proj48h/backend/pages"
 	"Proj48h/functions"
-	pages "Proj48h/functions/pages"
 	"fmt"
 	"net/http"
 	"os"
@@ -53,16 +53,16 @@ func LaunchWebApp() {
 	http.HandleFunc("/group", pages.RecapPage)
 
 	// Définit le port du serveur local
-	finalport := ""
+	finalPort := ""
 	if Port != "" {
-		finalport = ":" + Port
+		finalPort = ":" + Port
 	} else {
-		finalport = ":8080"
+		finalPort = ":8080"
 	}
-	println("Serveur lancer sur : http://localhost" + finalport)
+	println("Serveur lancer sur : http://localhost" + finalPort)
 
 	// Lance le serveur local
-	if err := http.ListenAndServe(finalport, nil); err != nil {
+	if err := http.ListenAndServe(finalPort, nil); err != nil {
 		panic(err)
 	}
 }
