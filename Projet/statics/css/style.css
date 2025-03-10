@@ -71,6 +71,48 @@ main {
     margin: 2rem 0;
 }
 
+ .input-group {
+     position: relative;
+     margin-bottom: 30px;
+ }
+
+ input[type="url"] {
+     width: 100%;
+     padding: 15px 20px;
+     font-size: 1.1em;
+     border: 2px solid #e0e0e0;
+     border-radius: 12px;
+     transition: all 0.3s ease;
+ }
+
+ input[type="url"]:focus {
+     outline: none;
+     border-color: #3498db;
+     box-shadow: 0 0 10px rgba(52, 152, 219, 0.2);
+ }
+
+ button {
+     background: linear-gradient(135deg, #3498db, #2980b9);
+     color: white;
+     border: none;
+     padding: 15px 40px;
+     font-size: 1.1em;
+     border-radius: 12px;
+     cursor: pointer;
+     transition: all 0.3s ease;
+     width: 100%;
+     display: block;
+ }
+
+ button:hover {
+     transform: translateY(-2px);
+     box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+ }
+
+ button:active {
+     transform: translateY(0);
+ }
+
 /* Footer Styles */
 footer {
     background: #2c3e50;
