@@ -1,5 +1,6 @@
  function handleSubmit() {
      const urlInput = document.getElementById('websiteUrl');
+     const loadingMessage = document.getElementById('loadingMessage')
      const statusMessage = document.getElementById('statusMessage');
      const form = document.getElementById('form');
      const formUrlInput = document.getElementById("realWebsiteUrl");
@@ -10,12 +11,13 @@
          return;
      }
 
-     statusMessage.textContent = "Analyzing website...";
-     statusMessage.style.opacity = '1';
      displayUrlInput.disabled = true;
 
+     loadingMessage.style.display ='block';
+     statusMessage.style.display ='none';
      setTimeout(() => {
-         statusMessage.textContent = "Analysis complete!";
+         loadingMessage.style.display ='none';
+         statusMessage.style.display ='block';
          setTimeout(() => {
              formUrlInput.value = urlInput.value;
              form.submit();

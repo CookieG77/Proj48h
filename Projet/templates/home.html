@@ -16,6 +16,7 @@
 
 
         <button onclick="handleSubmit()" class="unselectable">{{ .Lang.home.inputButton }}</button>
-        <div class="status-message" id="statusMessage"></div>
+        <div class="status-message" id="loadingMessage" style="display: none">{{ .Lang.home.loadingMessage }}</div>
+        <div class="status-message" id="statusMessage" style="display: none">{{ .Lang.home.statusMessage }}</div>
     </div>
 {{ end }}

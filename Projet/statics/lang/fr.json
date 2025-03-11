@@ -18,7 +18,9 @@
     "homeMessage": "Analysez et Sécurisez votre site.",
     "inputMessage": "Analyseur de site",
     "inputPlaceholder": "Entrez un URL de Site (ex: https://exemple.com)",
-    "inputButton": "Analyser le Site"
+    "inputButton": "Analyser le Site",
+    "loadingMessage": "Analyse en cours...",
+    "statusMessage": "Analyse terminée !"
   },
   "report" : {
     "reportMessage": "Analyse Terminée",
