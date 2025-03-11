@@ -23,6 +23,7 @@ func LaunchWebApp() {
 	go func() {
 		for sig := range c {
 			if sig == os.Interrupt {
+				functions.RmTempDir()
 				functions.ClearCmd()
 				os.Exit(1)
 			}
@@ -54,6 +55,9 @@ func LaunchWebApp() {
 	if slices.Contains(Args, "--show-info") || slices.Contains(Args, "-si") {
 		functions.ShouldLogInfo = true
 	}
+
+	// Create the temporary directory
+	functions.MkTempDir()
 
 	// Managing the static files
 	http.Handle("/css/", http.StripPrefix("/css", http.FileServer(http.Dir("./statics/css"))))

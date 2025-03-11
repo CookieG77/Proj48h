@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ }
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Styles */
+header {
+    background: white;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2c3e50;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: #7f8c8d;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #3498db;
+}
+
+/* Main Content */
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 600px;
+    margin: 2rem 0;
+}
+
+ @keyframes typing {
+     from { width: 0; }
+     to { width: calc(var(--char-count) * 1ch + 5px); }
+ }
+
+ @keyframes blink {
+     0%, 100% { border-color: transparent; }
+     50% { border-color: black; }
+ }
+
+ .typewriter {
+     font-size: 3rem;
+     font-family: monospace;
+     font-weight: bold;
+     overflow: hidden;
+     white-space: nowrap;
+     border-right: 4px solid black;
+     display: inline-block;
+     animation:
+             typing 2s steps(var(--char-count)) forwards,
+             blink 0.75s step-end infinite;
+     animation-delay: 0s, 2s;
+     margin: 3px;
+ }
+
+ .input-group {
+     position: relative;
+     margin-bottom: 30px;
+     width: 100%;
+     margin-top: 1rem;
+ }
+
+ input[type="url"] {
+     width: 100%;
+     padding: 15px 20px;
+     font-size: 1.1em;
+     border: 2px solid #e0e0e0;
+     border-radius: 12px;
+     transition: all 0.3s ease;
+ }
+
+ input[type="url"]:focus {
+     outline: none;
+     border-color: #3498db;
+     box-shadow: 0 0 10px rgba(52, 152, 219, 0.2);
+ }
+
+ button {
+     background: linear-gradient(135deg, #3498db, #2980b9);
+     color: white;
+     border: none;
+     padding: 15px 40px;
+     font-size: 1.1em;
+     border-radius: 12px;
+     cursor: pointer;
+     transition: all 0.3s ease;
+     width: 100%;
+     display: block;
+ }
+
+ button:hover {
+     transform: translateY(-2px);
+     box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+ }
+
+ button:active {
+     transform: translateY(0);
+ }
+
+/* Footer Styles */
+footer {
+    background: #2c3e50;
+    color: white;
+    padding: 2rem;
+    margin-top: auto;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+}
+
+.footer-section h3 {
+    color: #3498db;
+    margin-bottom: 1rem;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section a {
+    color: #ecf0f1;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: #3498db;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #34495e;
+}
+
+/* Previous styles for form elements remain the same */
+/* ... (keep the previous form styles from the original code) ... */
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+ .unselectable {
+     user-select: none;
+ }
+</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Analyzer : Home</title>
+    <link rel="stylesheet" href="/css/style.css">
+    
+</head>
+<body>
+<header>
+<style>
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+ }
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Styles */
+header {
+    background: white;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2c3e50;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: #7f8c8d;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: #3498db;
+}
+
+/* Main Content */
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 600px;
+    margin: 2rem 0;
+}
+
+ @keyframes typing {
+     from { width: 0; }
+     to { width: calc(var(--char-count) * 1ch + 5px); }
+ }
+
+ @keyframes blink {
+     0%, 100% { border-color: transparent; }
+     50% { border-color: black; }
+ }
+
+ .typewriter {
+     font-size: 3rem;
+     font-family: monospace;
+     font-weight: bold;
+     overflow: hidden;
+     white-space: nowrap;
+     border-right: 4px solid black;
+     display: inline-block;
+     animation:
+             typing 2s steps(var(--char-count)) forwards,
+             blink 0.75s step-end infinite;
+     animation-delay: 0s, 2s;
+     margin: 3px;
+ }
+
+ .input-group {
+     position: relative;
+     margin-bottom: 30px;
+     width: 100%;
+     margin-top: 1rem;
+ }
+
+ input[type="url"] {
+     width: 100%;
+     padding: 15px 20px;
+     font-size: 1.1em;
+     border: 2px solid #e0e0e0;
+     border-radius: 12px;
+     transition: all 0.3s ease;
+ }
+
+ input[type="url"]:focus {
+     outline: none;
+     border-color: #3498db;
+     box-shadow: 0 0 10px rgba(52, 152, 219, 0.2);
+ }
+
+ button {
+     background: linear-gradient(135deg, #3498db, #2980b9);
+     color: white;
+     border: none;
+     padding: 15px 40px;
+     font-size: 1.1em;
+     border-radius: 12px;
+     cursor: pointer;
+     transition: all 0.3s ease;
+     width: 100%;
+     display: block;
+ }
+
+ button:hover {
+     transform: translateY(-2px);
+     box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+ }
+
+ button:active {
+     transform: translateY(0);
+ }
+
+/* Footer Styles */
+footer {
+    background: #2c3e50;
+    color: white;
+    padding: 2rem;
+    margin-top: auto;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+}
+
+.footer-section h3 {
+    color: #3498db;
+    margin-bottom: 1rem;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section a {
+    color: #ecf0f1;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+    color: #3498db;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #34495e;
+}
+
+/* Previous styles for form elements remain the same */
+/* ... (keep the previous form styles from the original code) ... */
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+ .unselectable {
+     user-select: none;
+ }
+</style>
+    <nav class="nav-container unselectable">
+        <a href="#" class="logo">Analyzer</a>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            
+            <select class="lang-select">
+                <option value="en">en</option>
+                
+                    
+                
+                    
+                        <option value="fr">fr</option>
+                    
+                
+            </select>
+        </div>
+    </nav>
+</header>
+
+<main>
+    
+
+
+    <div class="typewriter unselectable">Analyse and Secure your site.</div>
+    <div class="container">
+        <h1 class="unselectable">Website Analyzer</h1>
+        <div class="input-group">
+            <input type="url" id="websiteUrl"
+                   placeholder= Enter&#32;website&#32;URL&#32;(e.g.,&#32;https://example.com)
+                   autocomplete="off"
+                   required>
+        </div>
+        <button onclick="handleSubmit()" class="unselectable">Analyse Website</button>
+        <div class="status-message" id="statusMessage"></div>
+    </div>
+
+</main>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3 class="unselectable">About Us</h3>
+            <p>Providing website analysis solutions with cutting-edge technology.</p>
+        </div>
+        
+        <div class="footer-section">
+            <h3 class="unselectable">Connect</h3>
+            <ul>
+                <li><a target="_blank" rel="noopener noreferrer" href="https://github.com/CookieG77/WPS48H">GitHub</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 WPS48H. CC BY-NC-ND 4.0.</p>
+    </div>
+</footer>
+<script src="/js/script.js"></script>
+</body>
+</html>
