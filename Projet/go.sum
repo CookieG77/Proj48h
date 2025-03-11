@@ -1,3 +1,5 @@
+github.com/SebastiaanKlippert/go-wkhtmltopdf v1.9.3 h1:vrA6+R1BMLKMTbos8jAeuBrImHPGtY4gTlcue3OIej8=
+github.com/SebastiaanKlippert/go-wkhtmltopdf v1.9.3/go.mod h1:SQq4xfIdvf6WYKSDxAJc+xOJdolt+/bc1jnQKMtPMvQ=
 github.com/boombuler/barcode v1.0.0/go.mod h1:paBWMcWSl3LHKBqUq+rly7CNSldXjb2rDl3JlRe0mD8=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/go-gomail/gomail v0.0.0-20160411212932-81ebce5c23df h1:Bao6dhmbTA1KFVxmJ6nBoMuOJit2yjEgLJpIMYpop0E=

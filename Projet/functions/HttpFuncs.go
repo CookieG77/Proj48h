@@ -1,9 +1,11 @@
 package functions
 
 import (
-	"github.com/jung-kurt/gofpdf"
+	"github.com/SebastiaanKlippert/go-wkhtmltopdf"
 	"html/template"
+	"log"
 	"net/http"
+	"strings"
 )
 
 // MakeTemplate create a template from one or more template files given as parameter in the form of their path in string.
@@ -63,12 +65,34 @@ func NewContentInterface(pageTitleKey string, w http.ResponseWriter, r *http.Req
 }
 
 func ButtonPressed(w http.ResponseWriter, r *http.Request) {
-	pdf := gofpdf.New("P", "mm", "A4", "")
-	pdf.SetFont("Arial", "B", 12)
-	pdf.AddPage()
-	pdf.Cell(40, 10, "Hello, World!")
+	// Essayer de créer un générateur de PDF
+	pdf, err := wkhtmltopdf.NewPDFGenerator()
+	if err != nil {
+		log.Println("Erreur lors de la création du générateur PDF :", err)
+		http.Error(w, "Erreur lors de la création du PDF : "+err.Error(), http.StatusInternalServerError)
+		return
+	}
 
+	// Ajouter une page HTML simple
+	htmlContent := `<html><body><h1>Hello, PDF!</h1></body></html>`
+	page := wkhtmltopdf.NewPageReader(strings.NewReader(htmlContent))
+	pdf.AddPage(page)
+
+	// Essayer de générer le PDF
+	err = pdf.Create()
+	if err != nil {
+		log.Println("Erreur lors de la génération du PDF :", err)
+		http.Error(w, "Erreur lors de la génération du PDF : "+err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	// Définir les headers et envoyer le PDF
 	w.Header().Set("Content-Type", "application/pdf")
-	w.Header().Set("Content-Disposition", "attachment; filename=example.pdf")
-	pdf.Output(w)
+	w.Header().Set("Content-Disposition", "attachment; filename=document.pdf")
+
+	_, err = w.Write(pdf.Bytes())
+	if err != nil {
+		log.Println("Erreur lors de l'envoi du PDF :", err)
+		http.Error(w, "Erreur lors de l'envoi du PDF", http.StatusInternalServerError)
+	}
 }
