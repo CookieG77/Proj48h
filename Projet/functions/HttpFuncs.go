@@ -49,6 +49,10 @@ func NewContentInterface(pageTitleKey string, w http.ResponseWriter, r *http.Req
 		ContentInterface["Lang"] = langText
 		ContentInterface["Title"] = langText["pageNames"].(map[string]interface{})[pageTitleKey]
 	}
+	// On va initialiser les listes de styles et de scripts supplémentaires.
+	// Ces listes serviront à ajouter des styles et des scripts supplémentaires pour qu'ils soient chargés par le template.
+	ContentInterface["AdditionalStyles"] = []string{}
+	ContentInterface["AdditionalScripts"] = []string{}
 
 	// Setting the language
 	ContentInterface["LangList"] = LangListToStrList(langList)
@@ -59,4 +63,11 @@ func NewContentInterface(pageTitleKey string, w http.ResponseWriter, r *http.Req
 	// ContentInterface["CurrentTheme"] = string(currentTheme)
 
 	return ContentInterface
+}
+
+// AddAdditionalScriptsToContentInterface add additional JS scripts to be loaded by the template.
+func AddAdditionalScriptsToContentInterface(content *map[string]interface{}, scripts ...string) {
+	for _, scriptName := range scripts {
+		(*content)["AdditionalScripts"] = append((*content)["AdditionalScripts"].([]string), scriptName)
+	}
 }

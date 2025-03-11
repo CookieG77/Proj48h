@@ -1,27 +1,32 @@
  function handleSubmit() {
-    const urlInput = document.getElementById('websiteUrl');
-    const statusMessage = document.getElementById('statusMessage');
+     const urlInput = document.getElementById('websiteUrl');
+     const statusMessage = document.getElementById('statusMessage');
+     const form = document.getElementById('form');
+     const formUrlInput = document.getElementById("realWebsiteUrl");
+     const displayUrlInput = document.getElementById("websiteUrl");
 
-    if (!urlInput.checkValidity()) {
-    urlInput.reportValidity();
-    return;
-}
+     if (!urlInput.checkValidity()) {
+         urlInput.reportValidity();
+         return;
+     }
 
-    statusMessage.textContent = "Analyzing website...";
-    statusMessage.style.opacity = '1';
+     statusMessage.textContent = "Analyzing website...";
+     statusMessage.style.opacity = '1';
+     displayUrlInput.disabled = true;
 
-    setTimeout(() => {
-    statusMessage.textContent = "Analysis complete!";
-    setTimeout(() => {
-    statusMessage.style.opacity = '0';
-}, 2000);
-}, 1500);
-}
+     setTimeout(() => {
+         statusMessage.textContent = "Analysis complete!";
+         setTimeout(() => {
+             formUrlInput.value = urlInput.value;
+             form.submit();
+         }, 2000);
+     }, 1500);
 
-    document.getElementById('websiteUrl')
-    .addEventListener('keypress', function(e) {
-    if (e.key === 'Enter') handleSubmit();
-});
+     document.getElementById('websiteUrl')
+         .addEventListener('keypress', function (e) {
+             if (e.key === 'Enter') handleSubmit();
+         });
+ }
 
  document.addEventListener('DOMContentLoaded', () => {
      // Get all typewriter elements

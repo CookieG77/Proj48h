@@ -9,8 +9,8 @@ import (
 func HomePage(w http.ResponseWriter, r *http.Request) {
 	PageInfo := f.NewContentInterface("home", w, r)
 	tmpl := f.MakeTemplate(w, "templates/home.html")
-
-	f.TemplateToPDF(tmpl, "statics/css/style.css", PageInfo)
-
+	fileID := f.GenerateHexFilename()
+	f.SetCookie(w, "FileID", fileID)
+	f.AddAdditionalScriptsToContentInterface(&PageInfo, "js/homeScript.js")
 	f.ExecuteTemplate(w, tmpl, PageInfo)
 }

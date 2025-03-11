@@ -13,18 +13,17 @@ import (
 	"regexp"
 )
 
-const tmpDirPath = "tmp"
+const TmpDirPath = "tmp"
 
 // TemplateToHTML converts a template to an HTML file, and returns the path to the HTML file and its filename.
-func TemplateToHTML(tmp *template.Template, cssPath string, data any) (string, string) {
-	filename := GenerateHexFilename()
-	path := fmt.Sprintf("%s/%s.html", tmpDirPath, filename)
+func TemplateToHTML(tmp *template.Template, cssPath string, data any, HTMLFileName string) string {
+	path := fmt.Sprintf("%s/%s.html", TmpDirPath, HTMLFileName)
 
 	// Create a temporary file
 	file, err := os.Create(path)
 	if err != nil {
 		ErrorPrintf("An error occurred while trying to create the temporary file -> %v\n", err)
-		return "", ""
+		return ""
 	}
 	defer func(file *os.File) {
 		err := file.Close()
@@ -37,11 +36,11 @@ func TemplateToHTML(tmp *template.Template, cssPath string, data any) (string, s
 	err = tmp.Execute(file, data)
 	if err != nil {
 		ErrorPrintf("An error occurred while trying to execute the template -> %v\n", err)
-		return "", ""
+		return ""
 	}
 	InfoPrintf("Created HTML file -> %v\n", path)
 	InjectCSSIntoHTML(path, cssPath)
-	return path, filename
+	return path
 }
 
 // HTMLToPDF converts an HTML file to a PDF file, and returns the path to the PDF file.
@@ -52,7 +51,7 @@ func HTMLToPDF(htmlPath string, PDFname string) string {
 	var pdfBuf []byte
 
 	// Create a temporary file
-	pdfPath := fmt.Sprintf("%s/%s.pdf", tmpDirPath, PDFname)
+	pdfPath := fmt.Sprintf("%s/%s.pdf", TmpDirPath, PDFname)
 	err := chromedp.Run(ctx,
 		chromedp.Navigate(getFileURL(htmlPath)),
 		chromedp.ActionFunc(func(ctx context.Context) error {
@@ -77,12 +76,12 @@ func HTMLToPDF(htmlPath string, PDFname string) string {
 }
 
 // TemplateToPDF converts a template to a PDF file, and returns the path to the PDF file.
-func TemplateToPDF(tmp *template.Template, cssPath string, data any) string {
-	htmlPath, fileName := TemplateToHTML(tmp, cssPath, data)
-	if htmlPath == "" || fileName == "" {
+func TemplateToPDF(tmp *template.Template, cssPath string, data any, FileName string) string {
+	htmlPath := TemplateToHTML(tmp, cssPath, data, FileName)
+	if htmlPath == "" {
 		return ""
 	}
-	return HTMLToPDF(htmlPath, fileName)
+	return HTMLToPDF(htmlPath, FileName)
 }
 
 // InjectCSSIntoHTML modifies the given HTML file by injecting CSS from a CSS file.
@@ -159,27 +158,27 @@ func GenerateHexFilename() string {
 // MkTempDir creates a temporary directory.
 func MkTempDir() {
 	// Check if the temporary directory already exists
-	if _, err := os.Stat(tmpDirPath); !os.IsNotExist(err) {
-		WarningPrintf("Temporary directory already exists -> %v\n", tmpDirPath)
+	if _, err := os.Stat(TmpDirPath); !os.IsNotExist(err) {
+		WarningPrintf("Temporary directory already exists -> %v\n", TmpDirPath)
 		return
 	}
 
 	// Create the temporary directory
-	err := os.Mkdir(tmpDirPath, 0755)
+	err := os.Mkdir(TmpDirPath, 0755)
 	if err != nil {
 		ErrorPrintf("An error occurred while trying to create the temporary directory -> %v\n", err)
 		return
 	}
-	InfoPrintf("Created temporary directory -> %v\n", tmpDirPath)
+	InfoPrintf("Created temporary directory -> %v\n", TmpDirPath)
 }
 
 // RmTempDir remove all temporary files.
 func RmTempDir() {
 	// Suppress the temporary directory and all its content
-	err := os.RemoveAll(tmpDirPath)
+	err := os.RemoveAll(TmpDirPath)
 	if err != nil {
 		ErrorPrintf("An error occurred while trying to clear the temporary directory -> %v\n", err)
 		return
 	}
-	InfoPrintf("Cleared temporary directory -> %v\n", tmpDirPath)
+	InfoPrintf("Cleared temporary directory -> %v\n", TmpDirPath)
 }

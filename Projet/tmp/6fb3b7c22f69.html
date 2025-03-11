@@ -21,10 +21,9 @@ header {
     background: white;
     padding: 1rem 2rem;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    position: fixed;
+    position: sticky;
     top: 0;
     z-index: 100;
-    width: 100%;
 }
 
 .nav-container {
@@ -55,6 +54,14 @@ header {
 
 .nav-links a:hover {
     color: #3498db;
+}
+
+select {
+    border-radius: 10px;
+    padding: 3px;
+    border: 1px solid #2c3e50;
+    background-color: whitesmoke;
+    outline: none;
 }
 
 /* Main Content */
@@ -90,10 +97,13 @@ main {
      50% { border-color: black; }
  }
 
- .typewriter {
+ .home-message {
      font-size: 3rem;
      font-family: monospace;
      font-weight: bold;
+ }
+
+ .typewriter {
      overflow: hidden;
      white-space: nowrap;
      border-right: 4px solid black;
@@ -112,7 +122,7 @@ main {
      margin-top: 1rem;
  }
 
- input[type="url"] {
+ .main-inputs {
      width: 100%;
      padding: 15px 20px;
      font-size: 1.1em;
@@ -121,7 +131,7 @@ main {
      transition: all 0.3s ease;
  }
 
- input[type="url"]:focus {
+ .main-inputs:focus {
      outline: none;
      border-color: #3498db;
      box-shadow: 0 0 10px rgba(52, 152, 219, 0.2);
@@ -155,11 +165,6 @@ footer {
     color: white;
     padding: 2rem;
     margin-top: auto;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
 }
 
 .footer-content {
@@ -216,10 +221,21 @@ footer {
  .unselectable {
      user-select: none;
  }
+
+ .div-tester {
+     width: 50vh;
+     height: 80vh;
+     background-color: red;
+ }
+
+ #email-form {
+     display: flex;
+     justify-content: space-between;
+ }
 </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Website Analyzer : Home</title>
+    <title>Website Analyzer : Report</title>
     <link rel="stylesheet" href="/css/style.css">
     
 </head>
@@ -245,10 +261,9 @@ header {
     background: white;
     padding: 1rem 2rem;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    position: fixed;
+    position: sticky;
     top: 0;
     z-index: 100;
-    width: 100%;
 }
 
 .nav-container {
@@ -279,6 +294,14 @@ header {
 
 .nav-links a:hover {
     color: #3498db;
+}
+
+select {
+    border-radius: 10px;
+    padding: 3px;
+    border: 1px solid #2c3e50;
+    background-color: whitesmoke;
+    outline: none;
 }
 
 /* Main Content */
@@ -314,10 +337,13 @@ main {
      50% { border-color: black; }
  }
 
- .typewriter {
+ .home-message {
      font-size: 3rem;
      font-family: monospace;
      font-weight: bold;
+ }
+
+ .typewriter {
      overflow: hidden;
      white-space: nowrap;
      border-right: 4px solid black;
@@ -336,7 +362,7 @@ main {
      margin-top: 1rem;
  }
 
- input[type="url"] {
+ .main-inputs {
      width: 100%;
      padding: 15px 20px;
      font-size: 1.1em;
@@ -345,7 +371,7 @@ main {
      transition: all 0.3s ease;
  }
 
- input[type="url"]:focus {
+ .main-inputs:focus {
      outline: none;
      border-color: #3498db;
      box-shadow: 0 0 10px rgba(52, 152, 219, 0.2);
@@ -379,11 +405,6 @@ footer {
     color: white;
     padding: 2rem;
     margin-top: auto;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
 }
 
 .footer-content {
@@ -440,6 +461,17 @@ footer {
  .unselectable {
      user-select: none;
  }
+
+ .div-tester {
+     width: 50vh;
+     height: 80vh;
+     background-color: red;
+ }
+
+ #email-form {
+     display: flex;
+     justify-content: space-between;
+ }
 </style>
     <nav class="nav-container unselectable">
         <a href="#" class="logo">Analyzer</a>
@@ -463,19 +495,22 @@ footer {
 <main>
     
 
-
-    <div class="typewriter unselectable">Analyse and Secure your site.</div>
-    <div class="container">
-        <h1 class="unselectable">Website Analyzer</h1>
-        <div class="input-group">
-            <input type="url" id="websiteUrl"
-                   placeholder= Enter&#32;website&#32;URL&#32;(e.g.,&#32;https://example.com)
-                   autocomplete="off"
-                   required>
+<div class="unselectable home-message">Analysis Done</div>
+<div class="container">
+    <section id="PDF-section">
+        <div class="div-tester">
+            
         </div>
-        <button onclick="handleSubmit()" class="unselectable">Analyse Website</button>
-        <div class="status-message" id="statusMessage"></div>
-    </div>
+    </section>
+    <section class="">
+        <input type="email" id="email-input" class="main-inputs"
+               placeholder= email@example.com
+        >
+        <button id="sendByMail">Send to Email</button>
+        <button id="downloadButton">Download in PDF</button>
+    </section>
+</div>
+
 
 </main>
 
@@ -497,6 +532,6 @@ footer {
         <p>&copy; 2025 WPS48H. CC BY-NC-ND 4.0.</p>
     </div>
 </footer>
-<script src="/js/script.js"></script>
+
 </body>
 </html>

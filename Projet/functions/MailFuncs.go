@@ -87,3 +87,34 @@ func sendMail(to string, subject string, content string, wg *sync.WaitGroup) {
 		InfoPrintf("Mail sent to %s\n", to)
 	}
 }
+
+func SendMailWithAttachments(to string, subject string, content string, attachments ...string) {
+	if !initialized {
+		ErrorPrintln("Mail Service not initialized, check the SMTP server configuration file")
+		return
+	}
+
+	wg.Add(1)
+	go sendMailWithAttachments(to, subject, content, attachments, &wg)
+	wg.Wait()
+}
+
+func sendMailWithAttachments(to string, subject string, content string, attachments []string, wg *sync.WaitGroup) {
+	defer wg.Done()
+
+	m := gomail.NewMessage()
+	m.SetHeader("From", dialer.Username)
+	m.SetHeader("To", to)
+	m.SetHeader("Subject", subject)
+	m.SetBody("text/html", content)
+
+	for _, attachment := range attachments {
+		m.Attach(attachment)
+	}
+
+	if err := dialer.DialAndSend(m); err != nil {
+		ErrorPrintf("Could not send mail to %s -> %v\n", to, err)
+	} else {
+		InfoPrintf("Mail sent to %s\n", to)
+	}
+}
