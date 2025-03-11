@@ -1,12 +1,13 @@
 package pages
 
 import (
-	"Proj48h/functions"
+	f "Proj48h/functions"
 	"net/http"
 )
 
+// HomePage is the handler for the home page.
 func HomePage(w http.ResponseWriter, r *http.Request) {
-	PageInfo := functions.NewContentInterface("Acceuil", w, r)
+	PageInfo := f.NewContentInterface("home", w, r)
 
-	functions.MakeTemplateAndExecute(w, r, PageInfo, "templates/home.html")
+	f.MakeTemplateAndExecute(w, r, PageInfo, "templates/home.html")
 }

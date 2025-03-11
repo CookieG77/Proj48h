@@ -3,7 +3,6 @@ package backend
 import (
 	pages "Proj48h/backend/pages"
 	"Proj48h/functions"
-	"fmt"
 	"net/http"
 	"os"
 	"os/signal"
@@ -13,7 +12,10 @@ import (
 
 var Port = "8080"
 
-// LaunchWebApp lance l'application web
+// LaunchWebApp launch the web application.
+// It will listen on the port 8080 by default.
+// If the argument '--port [port]' is provided, it will listen on the specified port.
+// If the port is not a valid number, the program will exit.
 func LaunchWebApp() {
 
 	c := make(chan os.Signal, 1)
@@ -27,42 +29,53 @@ func LaunchWebApp() {
 		}
 	}()
 
-	// Gestion des arguments
+	// Managing the arguments
 	Args := functions.GetArgs()
-	if slices.Contains(Args, "--port") {
-		// Gestion argument '--port [port]'
+	if slices.Contains(Args, "--port") || slices.Contains(Args, "-p") {
+		// Check if the port is provided
 		if len(Args) > slices.Index(Args, "--port")+1 {
 			rawProposedPort := Args[slices.Index(Args, "--port")+1]
 			proposedPort, err := strconv.Atoi(rawProposedPort)
 
 			if err != nil || proposedPort < 1 || proposedPort > 65535 {
-				fmt.Println("Le port proposé n'est pas un nombre valide.")
-				os.Exit(1)
+				functions.FatalPrintln("The port provided is not a valid number. Please provide a valid port number. (1-65535)")
+			}
+			Port = rawProposedPort
+		} else if len(Args) > slices.Index(Args, "-p")+1 {
+			rawProposedPort := Args[slices.Index(Args, "-p")+1]
+			proposedPort, err := strconv.Atoi(rawProposedPort)
+
+			if err != nil || proposedPort < 1 || proposedPort > 65535 {
+				functions.FatalPrintln("The port provided is not a valid number. Please provide a valid port number. (1-65535)")
 			}
 			Port = rawProposedPort
 		}
 	}
+	if slices.Contains(Args, "--show-info") || slices.Contains(Args, "-si") {
+		functions.ShouldLogInfo = true
+	}
 
-	// Mettre la gestion des fichiers statiques ici
+	// Managing the static files
 	http.Handle("/css/", http.StripPrefix("/css", http.FileServer(http.Dir("./statics/css"))))
 	http.Handle("/img/", http.StripPrefix("/img", http.FileServer(http.Dir("./statics/img"))))
 	http.Handle("/js/", http.StripPrefix("/js", http.FileServer(http.Dir("./statics/js"))))
 
-	// Mettre la gestion des routes ici
+	// Managing the pages
 	http.HandleFunc("/", pages.HomePage)
-	http.HandleFunc("/group", pages.RecapPage)
-	http.HandleFunc("/executer-fonction", functions.ButtonPressed)
+	http.HandleFunc("/report", pages.ReportPage)
 
-	// Définit le port du serveur local
+	// Set the port to listen on and initialize the mail service with the configuration file
 	finalPort := ""
 	if Port != "" {
 		finalPort = ":" + Port
 	} else {
 		finalPort = ":8080"
 	}
-	println("Serveur lancer sur : http://localhost" + finalPort)
+	functions.InitMail("MailConfig.json")
 
-	// Lance le serveur local
+	functions.SuccessPrintf("Server started at -> http://localhost%s\n", finalPort)
+
+	// Launch the server
 	if err := http.ListenAndServe(finalPort, nil); err != nil {
 		panic(err)
 	}

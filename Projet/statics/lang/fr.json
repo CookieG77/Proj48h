@@ -1,0 +1,25 @@
+{
+  "pageNames" : {
+    "home" : "Acceuil",
+    "report" : "Rapport"
+  },
+  "base" : {
+    "header": {
+      "homeNav": "Accueil"
+    },
+    "footer": {
+      "aboutUs": "A Propos de Nous",
+      "aboutUsMessage": "Nous fournissons des solutions d'analyse de sites web avec une technologie de pointe.",
+      "connect": "Réseaux",
+      "connectGitHub": "GitHub"
+    }
+  },
+  "home" : {
+    "homeMessage": "Analysez et Sécurisez votre site.",
+    "inputMessage": "Analyseur de site",
+    "inputPlaceholder": "Entrez un URL de Site (ex: https://exemple.com)",
+    "inputButton": "Analyser le Site"
+  },
+  "report" : {
+  }
+}

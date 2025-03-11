@@ -44,4 +44,23 @@
  function downloadReport() {
      window.location.href = '/executer-fonction'
 
+ function setLang(lang) {
+     document.cookie = `lang=${lang};expires=0;samesite=lax;path=/`;
  }
+
+ document.addEventListener('DOMContentLoaded', function () {
+     const langSelect = document.querySelector('.lang-select');
+     if (langSelect) {
+         langSelect.addEventListener('change', function () {
+             const selectedLang = this.value;
+             setLang(selectedLang);
+             console.log(selectedLang)
+             location.reload();
+         });
+     }
+ });
+
+ function setTheme(theme) {
+     document.cookie = `theme=${theme};expires=0;samesite=lax;path=/`;
+ }
+}

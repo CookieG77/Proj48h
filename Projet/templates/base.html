@@ -4,17 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Website Analyzer : {{ .Title }}</title>
-    <link rel="stylesheet" href="/css/style.css" >
+    <link rel="stylesheet" href="/css/style.css">
+    <!--<link rel="stylesheet" href="/css/themes/{{ .CurrentTheme }}>-->
 </head>
 <body>
 <header>
-    <nav class="nav-container">
+    <nav class="nav-container unselectable">
         <a href="#" class="logo">Analyzer</a>
         <div class="nav-links">
-            <a href="#">Home</a>
-            <a href="#">Features</a>
+            <a href="#">{{ .Lang.base.header.homeNav }}</a>
+            <!-- <a href="#">Features</a>
             <a href="#">Documentation</a>
-            <a href="#">Contact</a>
+            <a href="#">Contact</a> -->
+            <select class="lang-select">
+                <option value="{{ .CurrentLang }}">{{ .CurrentLang }}</option>
+                {{ range .LangList }}
+                    {{ if ne $.CurrentLang . }}
+                        <option value="{{ . }}">{{ . }}</option>
+                    {{ end }}
+                {{ end }}
+            </select>
         </div>
     </nav>
 </header>
@@ -26,21 +35,21 @@
 <footer>
     <div class="footer-content">
         <div class="footer-section">
-            <h3>About Us</h3>
-            <p>Providing website analysis solutions with cutting-edge technology.</p>
+            <h3 class="unselectable">{{ .Lang.base.footer.aboutUs }}</h3>
+            <p>{{ .Lang.base.footer.aboutUsMessage }}</p>
         </div>
-        <div class="footer-section">
-            <h3>Legal</h3>
+        <!-- <div class="footer-section">
+            <h3 class="unselectable">Legal</h3>
             <ul>
                 <li><a href="#">Privacy Policy</a></li>
                 <li><a href="#">Terms of Service</a></li>
                 <li><a href="#">Cookie Policy</a></li>
             </ul>
-        </div>
+        </div> -->
         <div class="footer-section">
-            <h3>Connect</h3>
+            <h3 class="unselectable">{{ .Lang.base.footer.connect }}</h3>
             <ul>
-                <li><a target="_blank" rel="noopener noreferrer" href="https://github.com/CookieG77/WPS48H">GitHub</a></li>
+                <li><a target="_blank" rel="noopener noreferrer" href="https://github.com/CookieG77/WPS48H">{{ .Lang.base.footer.connectGitHub }}</a></li>
             </ul>
         </div>
     </div>
