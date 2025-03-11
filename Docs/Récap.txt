@@ -1,0 +1,55 @@
+Voici un récapitulatif de ce qui a été réalisé dans le projet Proj48h :
+Récapitulatif du Projet Proj48h
+1. Objectif du Projet
+Proj48h est une application web développée en Go, conçue pour analyser et sécuriser des sites web. Elle offre une interface utilisateur intuitive et prend en charge plusieurs langues.
+2. Structure du Projet
+Le projet est organisé de manière modulaire, avec des dossiers dédiés pour le code source, les templates, les fichiers statiques, et les fichiers de configuration. Voici la structure principale :
+
+Proj48h/
+├── Dockerfile
+├── docker-compose.yml
+├── go.mod
+├── go.sum
+├── README.md
+├── statics/
+│   ├── css/
+│   ├── img/
+│   └── lang/
+├── templates/
+└── Projet/
+    ├── main.go
+    ├── backend/
+    └── functions/
+
+3. Fonctionnalités Principales
+Analyse de Sites Web : L'application permet d'analyser des sites web pour détecter des vulnérabilités.
+Envoi de Rapports : Les utilisateurs peuvent recevoir des rapports par email après l'analyse.
+Interface Utilisateur : Une interface responsive avec des thèmes clairs et sombres.
+Support Multilingue : L'application prend en charge plusieurs langues, notamment le français et l'anglais.
+4. Technologies Utilisées
+Langage de Programmation : Go (Golang)
+Frameworks : Utilisation de bibliothèques comme chromedp pour l'analyse de sites.
+Docker : Conteneurisation de l'application pour faciliter le déploiement et la gestion des dépendances.
+
+4. Technologies Utilisées
+Langage de Programmation : Go (Golang)
+Frameworks : Utilisation de bibliothèques comme chromedp pour l'analyse de sites.
+Docker : Conteneurisation de l'application pour faciliter le déploiement et la gestion des dépendances.
+
+5. Configuration et Déploiement
+Dockerfile : Un fichier Docker a été créé pour construire l'image de l'application, installer les dépendances nécessaires, et configurer l'environnement d'exécution.
+docker-compose.yml : Utilisé pour orchestrer les services, exposer les ports, et gérer les variables d'environnement.
+
+6. Gestion des Templates
+Templates HTML : Utilisation de fichiers de templates pour générer dynamiquement le contenu des pages web.
+Fonctions de Template : Des fonctions ont été créées pour faciliter la gestion des templates et l'exécution des contenus.
+
+7. Gestion des Langues
+Fichiers de Langue : Des fichiers JSON ont été utilisés pour stocker les traductions et les textes affichés dans l'application.
+Fonctions de Langue : Des fonctions ont été mises en place pour gérer la sélection et le changement de langue par l'utilisateur.
+8. Gestion des Fichiers Statistiques
+Fichiers CSS et Images : Les fichiers statiques, y compris les styles CSS et les images, sont organisés dans un dossier dédié pour une gestion facile.
+9. Gestion des Erreurs
+Gestion des Erreurs : Des mécanismes de gestion des erreurs ont été intégrés pour assurer une expérience utilisateur fluide et informative.
+Conclusion
+Le projet Proj48h est une application complète qui combine des fonctionnalités d'analyse de sites web avec une interface utilisateur conviviale et un support multilingue. Grâce à l'utilisation de Docker, le déploiement et la gestion des dépendances sont simplifiés, ce qui facilite l'intégration et l'évolution de l'application.
