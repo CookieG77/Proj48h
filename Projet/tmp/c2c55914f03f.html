@@ -137,6 +137,14 @@ main {
      box-shadow: 0 0 10px rgba(52, 152, 219, 0.2);
  }
 
+ #email-input {
+     margin-top: 10px;
+ }
+
+ .spacing {
+     margin-bottom: 7px;
+ }
+
  button {
      background: linear-gradient(135deg, #3498db, #2980b9);
      color: white;
@@ -377,6 +385,14 @@ main {
      box-shadow: 0 0 10px rgba(52, 152, 219, 0.2);
  }
 
+ #email-input {
+     margin-top: 10px;
+ }
+
+ .spacing {
+     margin-bottom: 7px;
+ }
+
  button {
      background: linear-gradient(135deg, #3498db, #2980b9);
      color: white;
@@ -474,9 +490,9 @@ footer {
  }
 </style>
     <nav class="nav-container unselectable">
-        <a href="#" class="logo">Analyzer</a>
+        <a href="/" class="logo">Analyzer</a>
         <div class="nav-links">
-            <a href="#">Accueil</a>
+            <a href="/">Accueil</a>
             
             <select class="lang-select">
                 <option value="fr">fr</option>
@@ -503,10 +519,10 @@ footer {
         </div>
     </section>
     <section class="">
-        <input type="email" id="email-input" class="main-inputs"
+        <input type="email" id="email-input" class="main-inputs spacing"
                placeholder= email@exemple.com
         >
-        <button id="sendByMail">Envoyer en tant qu&#39;Email</button>
+        <button id="sendByMail" class="spacing">Envoyer en tant qu&#39;Email</button>
         <button id="downloadButton">Télécharger en PDF</button>
     </section>
 </div>

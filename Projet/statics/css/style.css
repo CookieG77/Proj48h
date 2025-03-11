@@ -133,6 +133,14 @@ main {
      box-shadow: 0 0 10px rgba(52, 152, 219, 0.2);
  }
 
+ #email-input {
+     margin-top: 10px;
+ }
+
+ .spacing {
+     margin-bottom: 7px;
+ }
+
  button {
      background: linear-gradient(135deg, #3498db, #2980b9);
      color: white;
