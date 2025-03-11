@@ -1,3 +1,21 @@
 {{ define "content" }}
 
+<div class="unselectable home-message">{{ .Lang.report.reportMessage }}</div>
+<div class="container">
+    <section id="PDF-section">
+        <div class="div-tester">
+            <!-- structure PDF -->
+        </div>
+    </section>
+    <section class="">
+        <form action="" method="POST" id="email-form" class="input-group">
+            <input type="email" id="email-input" class="main-inputs"
+                   placeholder= {{ .Lang.report.inputEmailPlaceholder }}
+            >
+            <button type="submit">{{ .Lang.report.buttonEmailMessage }}</button>
+        </form>
+        <button onclick="">{{ .Lang.report.buttonDownloadMessage }}</button>
+    </section>
+</div>
+
 {{ end }}

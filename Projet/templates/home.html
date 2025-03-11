@@ -1,11 +1,11 @@
 {{ define "content" }}
 
 
-    <div class="typewriter unselectable">{{ .Lang.home.homeMessage }}</div>
+    <div class="typewriter unselectable home-message">{{ .Lang.home.homeMessage }}</div>
     <div class="container">
         <h1 class="unselectable">{{ .Lang.home.inputMessage }}</h1>
         <div class="input-group">
-            <input type="url" id="websiteUrl"
+            <input type="url" id="websiteUrl" class="main-inputs"
                    placeholder= {{ .Lang.home.inputPlaceholder }}
                    autocomplete="off"
                    required>
