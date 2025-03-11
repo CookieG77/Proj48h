@@ -1,6 +1,6 @@
 {{ define "content" }}
 
-<div class="unselectable home-message">Analysis done</div>
+<div class="unselectable home-message">{{ .Lang.report.reportMessage }}</div>
 <div class="container">
     <section id="PDF-section">
         <div class="div-tester">
@@ -10,10 +10,11 @@
     <section class="">
         <form action="" method="POST" id="email-form" class="input-group">
             <input type="email" id="email-input" class="main-inputs"
-                   placeholder="email@example.com">
-            <button type="submit">Send to Email</button>
+                   placeholder= {{ .Lang.report.inputEmailPlaceholder }}
+            >
+            <button type="submit">{{ .Lang.report.buttonEmailMessage }}</button>
         </form>
-        <button onclick="">Download in PDF</button>
+        <button onclick="">{{ .Lang.report.buttonDownloadMessage }}</button>
     </section>
 </div>
 

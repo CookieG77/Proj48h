@@ -21,5 +21,9 @@
     "inputButton": "Analyse Website"
   },
   "report" : {
+    "reportMessage": "Analysis Done",
+    "inputEmailPlaceholder": "email@example.com",
+    "buttonEmailMessage": "Send to Email",
+    "buttonDownloadMessage": "Download in PDF"
   }
 }
