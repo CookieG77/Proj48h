@@ -2,6 +2,7 @@ package functions
 
 import (
 	"fmt"
+	"github.com/jung-kurt/gofpdf"
 	"html/template"
 	"net/http"
 )
@@ -41,4 +42,19 @@ func NewContentInterface(pageTitle string, w http.ResponseWriter, r *http.Reques
 	ContentInterface["Title"] = pageTitle
 
 	return ContentInterface
+}
+
+func ButtonPressed(w http.ResponseWriter, r *http.Request) {
+	// Traitement de la requête
+	pdf := gofpdf.New("P", "mm", "A4", "")
+	pdf.AddPage()
+	pdf.SetFont("Arial", "B", 16)
+	pdf.Cell(40, 10, "Hello, World!")
+
+	w.Header().Set("Content-Type", "application/pdf")
+	w.Header().Set("Content-Disposition", "attachment; filename=Report.pdf")
+	err := pdf.Output(w)
+	if err != nil {
+		http.Error(w, "Could not generate PDF", http.StatusInternalServerError)
+	}
 }

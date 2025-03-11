@@ -51,6 +51,7 @@ func LaunchWebApp() {
 	// Mettre la gestion des routes ici
 	http.HandleFunc("/", pages.HomePage)
 	http.HandleFunc("/group", pages.RecapPage)
+	http.HandleFunc("/executer-fonction", functions.ButtonPressed)
 
 	// Définit le port du serveur local
 	finalPort := ""

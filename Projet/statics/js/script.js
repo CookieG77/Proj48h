@@ -7,6 +7,7 @@
     return;
 }
 
+
     statusMessage.textContent = "Analyzing website...";
     statusMessage.style.opacity = '1';
 
@@ -39,3 +40,8 @@
          element.setAttribute('aria-label', `Typing: ${text}`);
      });
  });
+
+ function downloadReport() {
+     window.location.href = '/executer-fonction'
+
+ }
