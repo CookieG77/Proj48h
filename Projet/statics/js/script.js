@@ -35,8 +35,6 @@
          // Set CSS custom property
          element.style.setProperty('--char-count', length);
 
-         // Optional: Add aria-label for accessibility
-         element.setAttribute('aria-label', `Typing: ${text}`);
      });
  });
 
