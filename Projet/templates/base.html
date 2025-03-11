@@ -57,6 +57,8 @@
         <p>&copy; 2025 WPS48H. CC BY-NC-ND 4.0.</p>
     </div>
 </footer>
-<script src="/js/script.js"></script>
+{{ range $_, $script := .AdditionalScripts }}
+<script src="{{ $script }}"></script>
+{{ end }}
 </body>
 </html>

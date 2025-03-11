@@ -23,6 +23,7 @@ func LaunchWebApp() {
 	go func() {
 		for sig := range c {
 			if sig == os.Interrupt {
+				functions.RmTempDir()
 				functions.ClearCmd()
 				os.Exit(1)
 			}
@@ -55,6 +56,9 @@ func LaunchWebApp() {
 		functions.ShouldLogInfo = true
 	}
 
+	// Create the temporary directory
+	functions.MkTempDir()
+
 	// Managing the static files
 	http.Handle("/css/", http.StripPrefix("/css", http.FileServer(http.Dir("./statics/css"))))
 	http.Handle("/img/", http.StripPrefix("/img", http.FileServer(http.Dir("./statics/img"))))
@@ -63,7 +67,8 @@ func LaunchWebApp() {
 	// Managing the pages
 	http.HandleFunc("/", pages.HomePage)
 	http.HandleFunc("/report", pages.ReportPage)
-	http.HandleFunc("/download", functions.ButtonPressed)
+	http.HandleFunc("/download", pages.DownloadFile)
+	http.HandleFunc("/send-mail-for-download", pages.SendByMail)
 
 	// Set the port to listen on and initialize the mail service with the configuration file
 	finalPort := ""

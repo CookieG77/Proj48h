@@ -52,6 +52,14 @@ header {
     color: #3498db;
 }
 
+select {
+    border-radius: 10px;
+    padding: 3px;
+    border: 1px solid #2c3e50;
+    background-color: whitesmoke;
+    outline: none;
+}
+
 /* Main Content */
 main {
     flex: 1;
@@ -85,10 +93,13 @@ main {
      50% { border-color: black; }
  }
 
- .typewriter {
+ .home-message {
      font-size: 3rem;
      font-family: monospace;
      font-weight: bold;
+ }
+
+ .typewriter {
      overflow: hidden;
      white-space: nowrap;
      border-right: 4px solid black;
@@ -107,7 +118,7 @@ main {
      margin-top: 1rem;
  }
 
- input[type="url"] {
+ .main-inputs {
      width: 100%;
      padding: 15px 20px;
      font-size: 1.1em;
@@ -116,7 +127,7 @@ main {
      transition: all 0.3s ease;
  }
 
- input[type="url"]:focus {
+ .main-inputs:focus {
      outline: none;
      border-color: #3498db;
      box-shadow: 0 0 10px rgba(52, 152, 219, 0.2);
@@ -205,4 +216,15 @@ footer {
 
  .unselectable {
      user-select: none;
+ }
+
+ .div-tester {
+     width: 50vh;
+     height: 80vh;
+     background-color: red;
+ }
+
+ #email-form {
+     display: flex;
+     justify-content: space-between;
  }
