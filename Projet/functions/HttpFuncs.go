@@ -1,6 +1,7 @@
 package functions
 
 import (
+	"github.com/jung-kurt/gofpdf"
 	"html/template"
 	"net/http"
 )
@@ -59,4 +60,15 @@ func NewContentInterface(pageTitleKey string, w http.ResponseWriter, r *http.Req
 	// ContentInterface["CurrentTheme"] = string(currentTheme)
 
 	return ContentInterface
+}
+
+func ButtonPressed(w http.ResponseWriter, r *http.Request) {
+	pdf := gofpdf.New("P", "mm", "A4", "")
+	pdf.SetFont("Arial", "B", 12)
+	pdf.AddPage()
+	pdf.Cell(40, 10, "Hello, World!")
+
+	w.Header().Set("Content-Type", "application/pdf")
+	w.Header().Set("Content-Disposition", "attachment; filename=example.pdf")
+	pdf.Output(w)
 }

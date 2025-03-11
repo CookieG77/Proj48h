@@ -63,6 +63,7 @@ func LaunchWebApp() {
 	// Managing the pages
 	http.HandleFunc("/", pages.HomePage)
 	http.HandleFunc("/report", pages.ReportPage)
+	http.HandleFunc("/executer-fonction", functions.ButtonPressed)
 
 	// Set the port to listen on and initialize the mail service with the configuration file
 	finalPort := ""
