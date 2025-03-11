@@ -46,6 +46,6 @@ func ReportPage(w http.ResponseWriter, r *http.Request) {
 
 	f.TemplateToPDF(tmpl, "statics/css/style.css", PageInfo, fileID)
 
-	f.AddAdditionalScriptsToContentInterface(&PageInfo, "/js/reportScript.js")
+	// f.AddAdditionalScriptsToContentInterface(&PageInfo, "/js/reportScript.js")
 	f.ExecuteTemplate(w, tmpl, PageInfo)
 }

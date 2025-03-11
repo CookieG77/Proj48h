@@ -67,7 +67,8 @@ func LaunchWebApp() {
 	// Managing the pages
 	http.HandleFunc("/", pages.HomePage)
 	http.HandleFunc("/report", pages.ReportPage)
-	http.HandleFunc("/download", pages.DownloadFile)
+	// http.HandleFunc("/download", pages.DownloadFile)
+	http.HandleFunc("/download", functions.ButtonPressed)
 	http.HandleFunc("/send-mail-for-download", pages.SendByMail)
 
 	// Set the port to listen on and initialize the mail service with the configuration file
